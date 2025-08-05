@@ -22,8 +22,8 @@ A Spring Boot application that lets you flash an ESP32 in your browser and remot
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-org/springboot-ada1306-display.git
-   cd springboot-ada1306-display
+   git clone https://github.com/Yxeyuo/ESignageP32.git
+   cd ESignageP32
    ```
 2. **Configure environment variables**:
 
