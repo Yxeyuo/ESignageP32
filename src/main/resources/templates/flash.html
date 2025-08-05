@@ -1,0 +1,77 @@
+<!-- src/main/resources/templates/flash.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: layout_head">
+  <!-- Use the pageTitle fragment for the document title -->
+  <title th:fragment="pageTitle">ESignageP32 Flash &amp; Config</title>
+</head>
+<body>
+<!-- Include site header -->
+<header th:replace="fragments/header :: header"></header>
+
+<div class="container text-center mt-5">
+  <!-- Page heading -->
+  <h1 class="mb-4">ESignageP32 Flash &amp; Config</h1>
+  <!-- Instruction text -->
+  <p class="lead mb-4">
+    Plug your ESP32 into USB and click “Connect,” or generate the config manually.
+  </p>
+
+  <div class="mx-auto" style="max-width:400px;">
+    <!-- Flash tool connect button -->
+    <esp-web-install-button
+            id="installBtn"
+            manifest="/esp-web/manifest.json"
+            class="btn btn-success btn-lg w-100 mb-4">
+      <button slot="activate" class="btn btn-success btn-lg w-100">
+        Connect
+      </button>
+    </esp-web-install-button>
+
+    <!-- Manual config generation button -->
+    <button id="manualBtn"
+            class="btn btn-danger btn-lg w-100">
+      Generate &amp; Download Manual Flash Config
+    </button>
+  </div>
+
+  <!-- Log output area -->
+  <pre id="log"
+       class="mt-4 bg-light p-3 rounded shadow-sm"
+       style="white-space:pre-wrap; height:200px; overflow-y:auto;">
+        </pre>
+</div>
+
+<!-- Include site footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<!-- Flash tool script -->
+<script type="module"
+        src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js"></script>
+<script>
+  // Append messages to the log area
+  const logEl = document.getElementById('log');
+  const log = txt => { logEl.textContent += txt + '\n'; };
+
+  // Flash tool event handlers
+  const installBtn = document.getElementById('installBtn');
+  installBtn.addEventListener('install-ready',  () => log('🔧 Flash tool ready'));
+  installBtn.addEventListener('install-start',  () => log('🚀 Flash started'));
+  installBtn.addEventListener('install-error',  e  => log('❌ ' + e.detail.message));
+  installBtn.addEventListener('install-success',() => log('✅ Flash successful – config embedded'));
+
+  // Manual config generation logic
+  document.getElementById('manualBtn').addEventListener('click', () => {
+    const warning =
+            "⚠️ Device will be added to the devices list – proceed with caution!\n" +
+            "Passwords are stored in the config file in plain text.";
+    if (window.confirm(warning)) {
+      log('🔄 Generating manual flash config...');
+      window.location.href = '/devices/init-config';
+    } else {
+      log('⏎ Manual generation canceled');
+    }
+  });
+</script>
+</body>
+</html>

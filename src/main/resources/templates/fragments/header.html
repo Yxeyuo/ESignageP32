@@ -1,0 +1,44 @@
+<!-- src/main/resources/templates/fragments/header.html -->
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+     th:fragment="header">
+  <!-- Header fragment: main navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container-fluid">
+      <!-- Brand/logo -->
+      <a class="navbar-brand" th:href="@{/devices}">ESignageP32 Management</a>
+      <!-- Toggler for mobile view -->
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarMain"
+              aria-controls="navbarMain" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Navigation links -->
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <!-- Link to device list -->
+            <a class="nav-link" th:href="@{/devices}">Devices</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <!-- Link to global settings -->
+            <a class="nav-link" th:href="@{/settings}">Settings</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <!-- Link to change password page -->
+            <a class="nav-link" th:href="@{/change-password}">Change Password</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <!-- Link to flash ESP32 page -->
+            <a class="nav-link" th:href="@{/flash}">Flash ESP32</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <!-- Logout link -->
+            <a class="nav-link" th:href="@{/logout}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

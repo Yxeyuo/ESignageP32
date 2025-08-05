@@ -1,0 +1,47 @@
+<!-- src/main/resources/templates/login.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: layout_head">
+  <!-- Define dynamic page title -->
+  <title th:fragment="pageTitle">Login</title>
+</head>
+<body>
+<!-- Include navigation header -->
+<header th:replace="fragments/header :: header"></header>
+
+<!-- Centered container for login form -->
+<div class="d-flex align-items-center vh-100">
+  <div class="container w-25">
+    <!-- Login page heading -->
+    <h1 class="mb-4 text-center">Login</h1>
+    <form th:action="@{/login}" method="post">
+      <!-- CSRF protection token -->
+      <input type="hidden" th:name="${_csrf.parameterName}"
+             th:value="${_csrf.token}"/>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username"
+               class="form-control" autofocus/>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="password"
+               class="form-control"/>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+      <!-- Error message when login fails -->
+      <div th:if="${param.error}" class="alert alert-danger mt-3">
+        Invalid username or password.
+      </div>
+      <!-- Confirmation message on logout -->
+      <div th:if="${param.logout}" class="alert alert-success mt-3">
+        You have been logged out.
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Include site footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

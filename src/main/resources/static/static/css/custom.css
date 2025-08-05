@@ -1,0 +1,16 @@
+:root {
+    --bs-primary: #0056b3;
+    --bs-secondary: #6c757d;
+    --bs-body-bg: #f8f9fa;
+    --bs-body-color: #343a40;
+}
+
+body {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+
+.card {
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}

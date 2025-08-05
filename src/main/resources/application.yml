@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+app:
+  default-user:
+    username: ${APP_DEFAULT_USER_USERNAME}
+    password: ${APP_DEFAULT_USER_PASSWORD}
+
+esp32:
+  wifi:
+    ssid:   "${ESP32_WIFI_SSID:SSID}"
+    password: "${ESP32_WIFI_PASSWORD:wifi-password}"
+  ntp:
+    server: "${ESP32_NTP_SERVER:pool.ntp.org}"
+
+server:
+  domain: "${SERVER_DOMAIN:domain/ip}"

@@ -1,0 +1,88 @@
+<!-- src/main/resources/templates/settings.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: layout_head">
+    <!-- Define dynamic page title -->
+    <title th:fragment="pageTitle">System Settings</title>
+</head>
+<body>
+<!-- Include site header -->
+<header th:replace="fragments/header :: header"></header>
+
+<!-- Main content container -->
+<div class="container mt-4">
+    <!-- Page heading -->
+    <h1>System Settings</h1>
+    <!-- Success alert after saving settings -->
+    <div th:if="${param.success}" class="alert alert-success">
+        Settings have been saved.
+    </div>
+    <!-- Settings form -->
+    <form th:action="@{/settings}"
+          th:object="${settings}"
+          method="post"
+          class="row g-3">
+        <!-- CSRF protection token -->
+        <input type="hidden" th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}"/>
+
+        <!-- Wi-Fi SSID -->
+        <div class="col-md-6">
+            <label for="wifiSsid" class="form-label">Wi-Fi SSID</label>
+            <input type="text"
+                   id="wifiSsid"
+                   th:field="*{wifiSsid}"
+                   class="form-control"
+                   placeholder="e.g. MyNetwork"
+                   required/>
+        </div>
+
+        <!-- Wi-Fi Password -->
+        <div class="col-md-6">
+            <label for="wifiPassword" class="form-label">Wi-Fi Password</label>
+            <input type="password"
+                   id="wifiPassword"
+                   th:field="*{wifiPassword}"
+                   class="form-control"
+                   placeholder="••••••••"
+                   required/>
+        </div>
+
+        <!-- NTP Server -->
+        <div class="col-md-6">
+            <label for="ntpServer" class="form-label">NTP Server</label>
+            <input type="text"
+                   id="ntpServer"
+                   th:field="*{ntpServer}"
+                   class="form-control"
+                   placeholder="pool.ntp.org"
+                   required/>
+        </div>
+
+        <!-- Server Domain or IP -->
+        <div class="col-md-6">
+            <label for="serverDomain" class="form-label">Server Domain/IP</label>
+            <input type="text"
+                   id="serverDomain"
+                   th:field="*{serverDomain}"
+                   class="form-control"
+                   placeholder="your-server.tld"
+                   required/>
+        </div>
+
+        <!-- Form actions -->
+        <div class="col-12">
+            <!-- Save settings button -->
+            <button type="submit" class="btn btn-primary">Save</button>
+            <!-- Back to devices list -->
+            <a th:href="@{/devices}" class="btn btn-secondary ms-2">
+                Back to Devices
+            </a>
+        </div>
+    </form>
+</div>
+
+<!-- Include site footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>
